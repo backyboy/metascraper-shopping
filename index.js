@@ -161,6 +161,7 @@ module.exports = () => {
       ({ htmlDom: $, url }) =>
         $('[property="product:price:currency"]').attr("content"),
       ({ htmlDom: $, url }) => $("[itemprop=priceCurrency]").attr("content"),
+      ({ htmlDom: $, url }) => JSON.parse($(".twister-plus-buying-options-price-data").html())?.desktop_buybox_group_2[0].currencySymbol,
     ],
     condition: [
       ({ htmlDom: $, url }) => $jsonld("itemCondition")($, url),
@@ -220,7 +221,7 @@ module.exports = () => {
       ({ htmlDom: $, url }) =>
         toPriceFormat($("[data-asin-price]").attr("data-asin-price")), //amazon
       ({ htmlDom: $, url }) => toPriceFormat($("[itemprop=price]").html()),
-      ({ htmlDom: $, url }) => toPriceFormat(JSON.parse($('.twister-plus-buying-options-price-data').textContent).desktop_buybox_group_2[0].priceAmount),
+      ({ htmlDom: $, url }) => JSON.parse($(".twister-plus-buying-options-price-data").html())?.desktop_buybox_group_2[0].priceAmount,
       ({ htmlDom: $, url }) =>
         toPriceFormat(
           toPriceFormat($("#attach-base-product-price").attr("value"))
